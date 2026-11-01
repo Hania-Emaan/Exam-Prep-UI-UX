@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TutorMigo | Exam Prep</title>
+<style>
+:root {
+  --ink: #161e38;
+  --muted: #64708d;
+  --line: #e5e9f3;
+  --bg: #f6f8fc;
+  --purple: #6355d8;
+  --purple-hover: #5244c7;
+  --purple-soft: #eeebff;
+  --purple-light: #f6f4ff;
+  --teal: #0d8f89;
+  --teal-soft: #e5f7f5;
+  --orange: #eb9438;
+  --orange-soft: #fff3e6;
+  --pink: #d8528c;
+  --pink-soft: #fdecf4;
+  --blue: #2b7bb9;
+  --blue-soft: #e8f4fc;
+  --white: #ffffff;
+  --shadow: 0 12px 36px rgba(22, 30, 56, 0.06);
+  --shadow-hover: 0 18px 44px rgba(99, 85, 216, 0.14);
+  --radius: 22px;
+  --radius-sm: 14px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #9c91ff;
+  outline-offset: 3px;
+}
+button:disabled { cursor: not-allowed; opacity: 0.5; }
+
+.container {
+  width: min(1240px, calc(100% - 48px));
+  margin: auto;
+}
+
+/* Teal Header for all pages */
+.site-header {
+  background: linear-gradient(135deg, #0d8f89 0%, #0a736e 100%);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 4px 20px rgba(13, 143, 137, 0.25);
+}
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 21px;
+  letter-spacing: -0.8px;
+  border: 0;
+  background: none;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+.brand:hover {
+  transform: scale(1.02);
+}
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0d8f89;
+  font-weight: 900;
+  font-size: 19px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.header-nav { display: flex; align-items: center; gap: 8px; }
+.header-nav button, .link-btn {
+  background: none;
+  border: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 650;
+  padding: 10px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.header-nav button:hover, .link-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.header-nav button.current {
+  color: #0d8f89;
+  background: #ffffff;
+  font-weight: 750;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.header-right { display: flex; align-items: center; gap: 12px; }
+.demo-badge, .pill, .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.3;
+  padding: 6px 12px;
+}
+.demo-badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  color: #0d8f89;
+  border-radius: 50%;
+  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+.avatar:hover {
+  transform: scale(1.08) rotate(4deg);
+}
+
+/* Layout */
+.main { min-height: 75vh; padding: 26px 0 70px; }
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8993aa;
+  font-size: 13px;
+  margin-bottom: 22px;
+}
+.crumb button { border: 0; background: none; padding: 0; color: #737e98; font-size: 13px; }
+.crumb button:hover { color: var(--purple); text-decoration: underline; }
+.crumb .active { color: var(--ink); font-weight: 650; }
+
+.crumb-center {
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 14px;
+}
+.crumb-center button { color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+.crumb-center .active { color: #ffffff; font-weight: 800; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+
+/* MAIN HERO BANNER - BRIGHT, CLEAR BACKGROUND IMAGE (1.jpg) */
+.single-hero-center {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 64px 28px 42px;
+  margin-bottom: 28px;
+  text-align: center;
+  color: white;
+  background-color: #252838;
+  background-image: url('1.jpg'), url('./1.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 18px 45px rgba(18, 22, 45, 0.18);
+}
+.single-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(12, 14, 26, 0.18) 0%, rgba(10, 12, 22, 0.45) 100%),
+              linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 1;
+}
+.single-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.single-hero-content h1 {
+  color: #ffffff;
+  font-size: clamp(34px, 4.5vw, 48px);
+  margin: 10px 0 14px;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85), 0 0 20px rgba(0,0,0,0.4);
+}
+.single-hero-content p.sub {
+  color: #ffffff;
+  font-size: 17px;
+  margin: 0 0 28px;
+  line-height: 1.5;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+}
+.single-hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+/* INNER PAGES PAGE BANNER (4_2.jpg / 4.jpg) - EXPANDED & CENTER ALIGNED */
+.inner-hero-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 90px 28px;
+  min-height: 420px;
+  margin-bottom: 28px;
+  color: white;
+  text-align: center;
+  background-color: #1e2638;
+  background-image: url('4_2.jpg'), url('./4_2.jpg'), url('4.jpg'), url('./4.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 16px 42px rgba(18, 22, 45, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inner-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(13, 20, 35, 0.22) 0%, rgba(10, 12, 22, 0.45) 100%),
+              linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.3) 100%);
+  z-index: 1;
+}
+.inner-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.inner-hero-content h1 {
+  color: #ffffff;
+  font-size: clamp(30px, 4vw, 42px);
+  margin: 10px 0 12px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85);
+}
+.inner-hero-content p {
+  color: rgba(255, 255, 255, 0.98);
+  font-size: 16.5px;
+  margin: 0;
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 850;
+  margin: 0 0 6px;
+}
+.eyebrow.light {
+  color: #ffe082;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  background: var(--purple);
+  color: white;
+  padding: 11px 19px;
+  border-radius: 12px;
+  font-weight: 750;
+  line-height: 1.2;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 85, 216, 0.28);
+  background: var(--purple-hover);
+}
+.btn.secondary { background: white; color: var(--ink); border-color: #dbe0eb; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.btn.secondary:hover { border-color: #b8b0f3; color: var(--purple); background: #fcfbff; }
+.btn.soft { background: var(--purple-soft); color: var(--purple); box-shadow: none; }
+.btn.soft:hover { background: #e2dcff; }
+.btn.small { font-size: 12px; padding: 8px 14px; border-radius: 10px; }
+.btn.text { background: none; color: var(--purple); padding: 5px 0; box-shadow: none; }
+.btn.text:hover { transform: none; text-decoration: underline; }
+
+.section-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin: 32px 0 16px; }
+.section-header h2, .section-header h3 { margin: 0; letter-spacing: -0.4px; }
+.section-header h2 { font-size: 22px; }
+.section-header h3 { font-size: 18px; }
+.section-header p { color: var(--muted); margin: 4px 0 0; font-size: 13px; }
+
+/* Cards & Grid */
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card h2, .card h3, .card h4 { margin: 0; letter-spacing: -0.4px; }
+.card p { margin: 6px 0 0; color: var(--muted); }
+.grid { display: grid; gap: 18px; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.between { justify-content: space-between; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.grow { flex: 1; }
+.muted { color: var(--muted); }
+.small-text { font-size: 13px; }
+
+/* Badges */
+.pill.purple { background: var(--purple-soft); color: var(--purple); }
+.pill.green { background: #e5f7f0; color: #0d8a6a; }
+.pill.amber { background: #fff4e5; color: #b86e18; }
+.pill.gray { background: #f0f2f7; color: #6b7790; }
+.pill.blue { background: var(--blue-soft); color: var(--blue); }
+
+/* Tabs */
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 6px;
+  background: #eaedf6;
+  border-radius: 16px;
+  margin: 24px 0;
+}
+.nav-tabs button {
+  border: 0;
+  background: transparent;
+  color: #697491;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 12px;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+.nav-tabs button.active {
+  background: white;
+  color: var(--purple);
+  box-shadow: 0 3px 12px rgba(22,30,56,0.08);
+}
+.tabs-centered {
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(12px);
+  padding: 6px;
+  border-radius: 16px;
+  margin: 0 auto;
+  max-width: fit-content;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+.tabs-centered button {
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.tabs-centered button.active {
+  background: #ffffff;
+  color: var(--purple);
+  text-shadow: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+
+/* Metric Card */
+.metric { position: relative; overflow: hidden; padding: 22px 24px; }
+.metric:before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--tone, #b8aff5); }
+.metric-label { font-size: 12px; font-weight: 750; color: #76819a; }
+.metric-value { font-size: 26px; line-height: 1.2; font-weight: 800; margin: 8px 0 2px; letter-spacing: -0.8px; }
+.metric small { color: #8e98b0; }
+
+.iconbox {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.iconbox.teal { background: var(--teal-soft); color: var(--teal); }
+.iconbox.orange { background: var(--orange-soft); color: var(--orange); }
+
+.focus-card { background: linear-gradient(135deg, #ffffff, #faf9ff); padding: 28px; }
+.focus-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+
+.action-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, #f1efff, #eef9f7);
+  border: 1px solid #e3dfff;
+  border-radius: 18px;
+  padding: 18px 22px;
+  margin-top: 20px;
+  box-shadow: 0 4px 16px rgba(99,85,216,0.05);
+}
+.action-strip p { margin: 2px 0 0; font-size: 13px; }
+.action-strip-icon { width: 50px; height: 50px; flex-shrink: 0; border-radius: 12px; overflow: hidden; }
+
+.week-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.day {
+  background: #f8f9fd;
+  border: 1px solid #edf0f7;
+  border-radius: 14px;
+  padding: 13px;
+  min-height: 98px;
+  transition: transform 0.15s ease;
+}
+.day:hover { transform: translateY(-2px); background: white; border-color: #dcd8fc; }
+.day b { display: block; font-size: 11px; color: var(--purple); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 7px; }
+.day span { font-size: 12px; color: #526079; }
+
+/* EXAM CARDS WITH IMAGES (2.jpg & 3.jpg) */
+.exam-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+.exam-card-image {
+  height: 185px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: #2a2254;
+}
+.exam-card-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%);
+}
+.exam-card-badge-layer {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+.exam-card-body { padding: 22px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+.exam-card h3 { font-size: 20px; }
+.exam-card .description { min-height: 40px; font-size: 13.5px; color: var(--muted); margin: 0; }
+.exam-meta { background: #f7f8fc; border-radius: 12px; padding: 12px 14px; }
+.exam-meta small { display: block; color: #8e98b0; font-weight: 750; font-size: 10px; letter-spacing: 0.09em; }
+.exam-meta span { font-size: 12px; color: #55627e; font-weight: 600; }
+
+.filter-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+.filter {
+  border: 1px solid var(--line);
+  background: white;
+  color: #727d97;
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.filter:hover { border-color: #c9c3f8; color: var(--purple); }
+.filter.active { color: var(--purple); background: var(--purple-soft); border-color: #d6d0fc; }
+
+.input, select, textarea {
+  width: 100%;
+  border: 1px solid #dde2ec;
+  background: #fff;
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 12px 15px;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.input:focus, select:focus, textarea:focus {
+  border-color: #9286f0;
+  box-shadow: 0 0 0 4px var(--purple-soft);
+}
+textarea { resize: vertical; min-height: 110px; }
+label { font-size: 12.5px; font-weight: 750; color: #495570; display: block; margin-bottom: 6px; }
+.field { min-width: 0; }
+.field small { display: block; margin-top: 5px; color: #8892a7; }
+
+.heading-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.header-details { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.header-details h1 { font-size: 32px; letter-spacing: -1.2px; line-height: 1.2; margin: 0; }
+.content-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 18px; }
+
+.callout {
+  background: #edf6ff;
+  border: 1px solid #d4e6f9;
+  color: #3b5f82;
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 13.5px;
+}
+.callout strong { color: #2a4c6e; }
+.callout.amber { background: #fff9ee; border-color: #f6e5b9; color: #8a6427; }
+
+.path-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f2f7;
+}
+.path-step:last-child { border-bottom: 0; padding-bottom: 0; }
+.step-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-weight: 800;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+.step-icon.done { background: #e3f7ef; color: #0b8a6b; }
+.step-icon.lock { background: #f0f2f7; color: #9aa2b4; }
+.path-step h4 { font-size: 14px; margin: 0; }
+.path-step p { font-size: 12.5px; margin: 3px 0; }
+
+/* Skill Cards with Image Integration & Dynamic Background Colors */
+.skill-card-rich {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.skill-card-rich:hover {
+  transform: translateY(-4px);
+  border-color: #cac3fa;
+  box-shadow: var(--shadow-hover);
+}
+.skill-card-thumb {
+  height: 120px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+.skill-card-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.38) 100%);
+}
+.skill-card-content { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+.skill-card-rich.teal-bg { background: linear-gradient(180deg, #f0fbf9 0%, #ffffff 100%); border-color: #c9eee7; }
+.skill-card-rich.purple-bg { background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%); border-color: #dbd5fd; }
+.skill-card-rich.orange-bg { background: linear-gradient(180deg, #fff7ee 0%, #ffffff 100%); border-color: #fde5c8; }
+.skill-card-rich.pink-bg { background: linear-gradient(180deg, #fdf2f7 0%, #ffffff 100%); border-color: #f9d8e7; }
+
+.section-link {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px 18px;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+.section-link:hover {
+  border-color: #b9afef;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.section-link-icon { width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; overflow: hidden; background-size: cover; background-position: center; }
+.section-link strong { display: block; font-size: 15px; }
+.section-link small { display: block; color: var(--muted); font-size: 12.5px; }
+.arrow { margin-left: auto; color: #9e97d4; font-size: 22px; }
+
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empty h3 { font-size: 17px; margin: 4px 0 0; }
+.empty p { font-size: 13px; max-width: 440px; margin: 8px auto 18px; color: var(--muted); }
+
+.dropzone {
+  border: 2px dashed #c9c5f0;
+  background: #faf9ff;
+  border-radius: 20px;
+  text-align: center;
+  padding: 34px 20px;
+  transition: all 0.2s ease;
+}
+.dropzone.dragover { background: var(--purple-soft); border-color: var(--purple); }
+.dropzone p { margin: 4px 0; color: var(--muted); font-size: 12.5px; }
+
+.file-row, .list-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f2f7;
+}
+.file-row:last-child, .list-row:last-child { border-bottom: 0; }
+.file-row .meta, .list-row .meta { flex: 1; min-width: 0; }
+.file-row strong { overflow-wrap: anywhere; }
+
+.toggle-row {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.toggle-row p { font-size: 12.5px; margin: 3px 0 0; }
+
+.switch { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+.switch input { position: absolute; opacity: 0; }
+.switch span { display: block; background: #cdd3e0; border-radius: 99px; height: 26px; transition: 0.2s ease; }
+.switch span:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: 0.2s ease;
+}
+.switch input:checked + span { background: var(--purple); }
+.switch input:checked + span:after { transform: translateX(20px); }
+.switch input:focus-visible + span { outline: 3px solid #9c91ff; outline-offset: 3px; }
+
+/* TEAL FOOTER FOR ALL PAGES */
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, #0d8f89 0%, #0a736e 100%);
+  color: #ffffff;
+  padding: 50px 0;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ffffff, #6355d8, #eb9438, #ffffff);
+}
+.footer-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+}
+.footer-centered p {
+  max-width: 560px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+.footer-links-center {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.footer-links-center button {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.footer-links-center button:hover {
+  color: #0d8f89;
+  background: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+.copyright-line {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 22px;
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+  display: block;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 45, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow: auto;
+}
+.modal {
+  width: min(580px, 100%);
+  background: white;
+  border-radius: 26px;
+  box-shadow: 0 25px 80px rgba(15, 20, 40, 0.25);
+  padding: 28px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.modal h2 { font-size: 23px; letter-spacing: -0.6px; margin: 0; }
+.modal p { color: var(--muted); font-size: 13.5px; }
+.modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: #f1f3f8;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #727e96;
+  flex-shrink: 0;
+}
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+
+.runner { max-width: 890px; margin: auto; }
+.runner-header { display: flex; justify-content: space-between; gap: 10px; align-items: center; flex-wrap: wrap; }
+.progress-bar { height: 8px; background: #eaedf5; border-radius: 999px; overflow: hidden; margin: 18px 0 26px; }
+.progress-bar span { display: block; height: 100%; background: linear-gradient(90deg, #7567f8, #36c6b2); border-radius: 999px; }
+.question-card { padding: 32px; }
+.question-card h2 { font-size: 24px; line-height: 1.35; margin: 14px 0; }
+.option {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  border: 1px solid #e2e6f0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 11px 0;
+  cursor: pointer;
+  font-weight: 550;
+  color: #3b4763;
+  font-size: 14.5px;
+  transition: all 0.15s ease;
+}
+.option:hover { border-color: #b3a8f5; background: #faf8ff; }
+.option:has(input:checked) { border-color: var(--purple); background: var(--purple-light); color: var(--ink); }
+.option input { accent-color: var(--purple); }
+.notice { font-size: 12.5px; color: #848ea4; }
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1f233d;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+  z-index: 50;
+  max-width: min(420px, 90vw);
+  font-size: 13.5px;
+}
+.hidden { display: none !important; }
+.accordion {
+  border: 0;
+  width: 100%;
+  background: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 750;
+  color: var(--ink);
+  padding: 0;
+  font-size: 16px;
+}
+.mock-banner {
+  background: linear-gradient(130deg, #f3f0ff, #eaf7f5);
+  border: 1px solid #e2ddfe;
+}
+.separator { height: 1px; background: var(--line); margin: 20px 0; }
+.inline-alert { padding: 13px 16px; border-radius: 12px; background: #fff5ea; color: #936329; font-size: 13px; }
+.tool-note { font-size: 12.5px; color: #848ea4; }
+
+@media(max-width: 900px) {
+  .grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .week-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .content-layout { grid-template-columns: 1fr; }
+  .header-nav button:nth-child(2) { display: none; }
+}
+@media(max-width: 768px) {
+  .container, body { max-width: 100% !important; }
+  body { padding: 0 !important; }
+  .container { width: calc(100% - 32px) !important; padding: 0 !important; }
+  .row, .two-col { flex-wrap: wrap; }
+  .grid.two, .grid.three, .grid.four { grid-template-columns: 1fr !important; }
+  .card { padding: 18px !important; }
+  h1 { font-size: 22pt !important; }
+  .header-inner { min-height: 64px; }
+  .header-nav { display: none; }
+  .demo-badge { display: none; }
+  .single-hero-center { padding: 40px 20px; }
+  .single-hero-content h1 { font-size: 28px; }
+  .main { padding-top: 20px; }
+  .week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-tabs { margin: 18px 0; }
+  .nav-tabs button { padding: 10px 12px; }
+  .header-details h1 { font-size: 26px; }
+  .question-card { padding: 20px !important; }
+  .footer-links-center { flex-direction: column; gap: 6px; }
+}
+@media(prefers-reduced-motion: reduce) {
+  *, *:before, *:after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="brand" data-action="home" aria-label="TutorMigo exam prep home">
+      <span class="brand-mark">t</span><span>tutormigo<span style="color:#ffffff">.</span></span>
+    </button>
+    <nav class="header-nav" aria-label="Main navigation">
+      <button class="current" data-action="home">Exam prep</button>
+      <button data-action="browse">Browse exams</button>
+      <button data-action="practice-tools">Practice tools</button>
+    </nav>
+    <div class="header-right">
+      <span class="demo-badge">✦ Interactive demo</span>
+      <button class="avatar" data-action="setup" aria-label="Open your exam settings">S</button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container" id="app"></div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-centered">
+    <div class="brand">
+      <span class="brand-mark">t</span><span>tutormigo<span style="color:#ffffff">.</span></span>
+    </div>
+    <p>A calmer, visually guided way to prepare for exams — one small step at a time. Empowering students through personalized AI study roadmaps and real test simulators.</p>
+    <div class="footer-links-center">
+      <button data-action="home">My prep</button>
+      <button data-action="browse">Browse exams</button>
+      <button data-action="tab" data-tab="practice">Practice</button>
+      <button data-action="tab" data-tab="setup">Settings</button>
+    </div>
+    <div class="copyright-line">
+      © 2026 TutorMigo AI. All rights reserved. Built for student success worldwide.
+    </div>
+  </div>
+</footer>
+
+<div id="modal-root"></div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{'use strict';
+const $=s=>document.querySelector(s), app=$('#app');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initial={
+  exam:'IELTS General',
+  focus:'IELTS Academic',
+  target:'9.0',
+  date:'',
+  language:'English',
+  support:'Balanced',
+  learning:'Standard',
+  daily:25,
+  weekly:4,
+  attachments:true,
+  voice:true,
+  noise:true,
+  diagnosticSkipped:false,
+  diagnosticDone:false,
+  files:[],
+  attempts:[],
+  mistakes:[],
+  plan:['Full test timed drill','Review mistakes in timed accuracy','Flashcards and vocabulary reinforcement','Tutor-guided explanation and worked examples','Mini mock under timed conditions','Reflection and score tracker update']
+};
+
+let saved={};
+try { saved=JSON.parse(localStorage.getItem('tutormigo-demo-v3')||'{}'); } catch(e){}
+let S={...initial,...saved};
+for(const k of ['files','attempts','mistakes','plan']) if(!Array.isArray(S[k])) S[k]=initial[k];
+
+let page='home', tab='overview', hubTab='myprep', filter='All', search='', toolsOpen=false, session=null, modalName='';
+
+const save=()=>{try{localStorage.setItem('tutormigo-demo-v3',JSON.stringify(S))}catch(e){toast('Could not save to browser.')}};
+const scrollTop=()=>window.scrollTo({top:0,behavior:'smooth'});
+const toast=(msg)=>{let t=$('#toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.add('hidden'),3500)};
+
+const ic=(x,cls='')=>`<span class="iconbox ${cls}" aria-hidden="true">${x}</span>`;
+const btn=(label,action,attrs='',klass='secondary')=>`<button type="button" class="btn ${klass}" data-action="${action}" ${attrs}>${label}</button>`;
+const exams=['IELTS Academic','IELTS General'];
+
+// INTEGRATED LOCAL IMAGE PATHS
+const image1_Header = '1.jpg';
+const image2_Academic = '2.jpg';
+const image3_General = '3.jpg';
+const imgListening = '5.webp'; 
+const imgReading = '6.jpg';
+const imgWriting = '7.jpg'; 
+const imgSpeaking = '9.avif';
+
+const skills=[
+  {name:'Listening', img:imgListening, bgClass:'teal-bg', color:'teal', time:'30 min', count:'40 questions'},
+  {name:'Reading', img:imgReading, bgClass:'purple-bg', color:'purple', time:'60 min', count:'40 questions'},
+  {name:'Writing', img:imgWriting, bgClass:'orange-bg', color:'orange', time:'60 min', count:'2 questions'},
+  {name:'Speaking', img:imgSpeaking, bgClass:'pink-bg', color:'pink', time:'15 min', count:'3 questions'}
+];
+
+const questions=[
+  {id:'reading',skill:'Reading',prompt:'Read the notice: “The library closes at 6 p.m. on Fridays.” When does the library close on Friday?',options:['At 5 p.m.','At 6 p.m.','At 7 p.m.','At 8 p.m.'],answer:1,explain:'The notice states that the library closes at 6 p.m. on Fridays.'},
+  {id:'listening',skill:'Listening',prompt:'Sample transcript: “The appointment is on Tuesday at ten.” When is the appointment?',options:['Monday at ten','Tuesday at ten','Tuesday at twelve','Thursday at ten'],answer:1,explain:'The transcript says Tuesday at ten. This demo uses text rather than audio.'},
+  {id:'writing',skill:'Writing',prompt:'Write a short note to a neighbour explaining that you will be away for a few days.',free:true},
+  {id:'speaking',skill:'Speaking',prompt:'Describe a place you like to visit and explain why. Type a short practice response below.',free:true}
+];
+
+const findQ=id=>questions.find(q=>q.id===id);
+function crumb(parts, center=false){return `<div class="crumb ${center?'crumb-center':''}"><button data-action="home">⌂</button><span>›</span><button data-action="home">Exam Prep</button>${parts.map(p=>`<span>›</span><span class="active">${esc(p)}</span>`).join('')}</div>`}
+const labelExam=e=>esc(e);
+function dateText(){if(!S.date)return 'No test date set';let d=new Date(S.date+'T12:00:00');return isNaN(d)?'No test date set':d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+function stat(label,value,detail,tone){return `<div class="card metric" style="--tone:${tone}"><div class="metric-label">${label}</div><div class="metric-value">${esc(value)}</div><small>${esc(detail)}</small></div>`}
+const week=()=>`<div class="week-grid">${S.plan.map((v,i)=>`<div class="day"><b>${['Mon','Tue','Wed','Thu','Fri','Sat'][i]||'Day'}</b><span>${esc(v)}</span></div>`).join('')}</div>`;
+
+function hubHeader(){
+  return `
+  <!-- UNIFIED SINGLE HERO HEADER WITH CRISP 1.JPG BACKGROUND -->
+  <div class="single-hero-center" style="background-image: url('${image1_Header}'), url('./1.jpg');">
+    <div class="single-hero-overlay"></div>
+    <div class="single-hero-content">
+      ${crumb([], true)}
+      <div class="eyebrow light">YOUR LEARNING SPACE ✦</div>
+      <h1>Exam prep, made simpler.</h1>
+      <p class="sub">Your focus exam and the one thing to do next.</p>
+      <div class="single-hero-actions">
+        ${btn('Continue learning →','open-focus','','primary')}
+        ${btn('Browse exams ↗','browse','','secondary')}
+      </div>
+      <nav class="nav-tabs tabs-centered" aria-label="Exam prep">
+        <button class="${hubTab==='myprep'?'active':''}" data-action="hub-tab" data-value="myprep">My Prep</button>
+        <button class="${hubTab==='browse'?'active':''}" data-action="hub-tab" data-value="browse">Browse</button>
+      </nav>
+    </div>
+  </div>`
+}
+
+function innerBanner(title, subtitle){
+  return `
+  <div class="inner-hero-banner">
+    <div class="inner-hero-overlay"></div>
+    <div class="inner-hero-content">
+      <div class="eyebrow light">STUDY SPACE ✦</div>
+      <h1>${esc(title)}</h1>
+      <p>${esc(subtitle)}</p>
+    </div>
+  </div>`;
+}
+
+function home(){
+  const latest=S.attempts.filter(a=>a.exam===S.focus).length;
+  return `${hubHeader()}
+
+  <div class="section-header">
+    <div>
+      <p class="eyebrow">Your focus</p>
+      <h2>Let’s pick up where you left off</h2>
+    </div>
+    ${btn('Change focus','change-focus','','text')}
+  </div>
+
+  <div class="card focus-card">
+    <div class="focus-top">
+      <div class="row">
+        ${ic('✦')}
+        <div>
+          <div class="row">
+            <h3>${labelExam(S.focus)}</h3>
+            <span class="pill gray">${latest?'In progress':'Not started'}</span>
+          </div>
+          <p class="small-text">Question bank ready · ${latest?latest+' demo session'+(latest===1?'':'s'):'Start with a practice session'}</p>
+        </div>
+      </div>
+      ${btn('Open exam →','open-focus','','secondary')}
+    </div>
+    <div class="separator"></div>
+    <div class="grid three">
+      ${stat('PREDICTED','—','No scored mock yet','#64c2b2')}
+      ${stat('TARGET',S.target,dateText(),'#f2b35c')}
+      ${stat('THIS WEEK','Timed practice','A balanced weekly review cadence','#aa9ced')}
+    </div>
+
+    <div class="action-strip">
+      <div class="row">
+        <div class="action-strip-icon" style="background-image: url('${imgListening}'); background-size: cover; background-position: center;"></div>
+        <div>
+          <strong>Practice listening</strong>
+          <p>Build accuracy with a short sample activity.</p>
+        </div>
+      </div>
+      ${btn('Continue →','start-skill','data-skill="Listening" data-focus="true"','primary small')}
+    </div>
+
+    <div class="section-header">
+      <div>
+        <h3>This week</h3>
+        <p>Your suggested rhythm for steady progress</p>
+      </div>
+      ${btn('Edit my plan','edit-plan','','text')}
+    </div>
+    ${week()}
+    <div class="row" style="margin-top:20px">
+      ${btn('Open exam','open-focus','','soft small')}
+      ${btn('Score tracker','score-tracker','','soft small')}
+      ${btn('Gap analysis','gap-analysis','','soft small')}
+    </div>
+  </div>
+
+  <div class="grid two" style="margin-top:20px">
+    <div class="card">
+      <div class="row between">
+        <div>
+          <h3>Other exams</h3>
+          <p class="small-text">1 exam available</p>
+        </div>
+        <span class="pill purple">Your library</span>
+      </div>
+      <div class="list-row">
+        ${ic('◈','teal')}
+        <div class="meta">
+          <strong>${esc(exams.find(e=>e!==S.focus))}</strong>
+          <div class="small-text muted">No scored mock yet · Target ${esc(S.target)}</div>
+        </div>
+        ${btn('Get started','open-other','','secondary small')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="row between">
+        <div>
+          <h3>To do</h3>
+          <p class="small-text">Your next step</p>
+        </div>
+        <span class="pill amber">Recommended</span>
+      </div>
+      <div class="list-row">
+        ${ic('✓','orange')}
+        <div class="meta">
+          <strong>${S.diagnosticDone?'Keep practising':'Try a quick diagnostic'}</strong>
+          <div class="small-text muted">${S.diagnosticDone?'Explore the four skills':'Get familiar with your starting point.'}</div>
+        </div>
+        ${btn(S.diagnosticDone?'Practice':'Start','todo','','secondary small')}
+      </div>
+    </div>
+  </div>`
+}
+
+function browse(){
+  let shown=exams.filter(e=>(filter==='All'||filter==='IELTS')&&e.toLowerCase().includes(search.toLowerCase()));
+  return `
+  ${innerBanner('Browse All Available Exams', 'Explore tailored preparation pathways, question banks, and timed mock tests.')}
+  <div class="section-header">
+    <div>
+      <h2>Browse exams</h2>
+      <p>Find the right starting point for your academic and career goals.</p>
+    </div>
+    <span class="pill purple">2 exams available</span>
+  </div>
+
+  <input class="input" id="exam-search" type="search" aria-label="Search exams" placeholder="Search exams — name, subject, or section..." value="${esc(search)}">
+
+  <div class="filter-row" style="margin:18px 0">
+    ${['All','AP Exams','Regents Exams','IELTS','SAT','ACT','TOEFL iBT','GRE','LSAT'].map(f=>`
+      <button class="filter ${f===filter?'active':''}" data-action="filter" data-value="${esc(f)}">
+        ${esc(f)} <span style="opacity:.65">${f==='All'||f==='IELTS'?2:0}</span>
+      </button>
+    `).join('')}
+  </div>
+
+  <div class="grid two">
+    ${shown.map(e=>{
+      const bgImg = e.endsWith('General') ? image3_General : image2_Academic;
+      return `
+      <div class="card exam-card">
+        <div class="exam-card-image" style="background-image: url('${bgImg}'), url('./${bgImg}');">
+          <div class="exam-card-image-overlay"></div>
+          <div class="exam-card-badge-layer">
+            <span class="pill green" style="box-shadow: 0 4px 10px rgba(0,0,0,0.2);">Enrolled</span>
+            <span class="pill gray" style="background: rgba(255,255,255,0.92); color: #333;">Question bank ready</span>
+          </div>
+        </div>
+        <div class="exam-card-body">
+          <div>
+            <h3>${esc(e)}</h3>
+            <p class="description">${e.endsWith('General')?'General-training IELTS path with letter writing and practical reading.':'Band-scored academic English prep with listening, reading, writing, and speaking.'}</p>
+          </div>
+          <div class="exam-meta">
+            <small>SECTIONS</small>
+            <span>Listening &nbsp;·&nbsp; Reading &nbsp;·&nbsp; Writing &nbsp;·&nbsp; Speaking</span>
+          </div>
+          <div class="row between" style="margin-top:auto">
+            <span class="small-text muted">◷ DURATION: ${e.endsWith('General')?'170':'165'} MIN</span>
+            <div class="row">
+              ${btn('View details','exam-details',`data-exam="${esc(e)}"`,'secondary small')}
+              ${btn('Continue prep →','open-exam',`data-exam="${esc(e)}"`,'primary small')}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  ${shown.length?'':`
+    <div class="card empty">
+      <h3>No exams found</h3>
+      <p>Try another search term or select the IELTS filter to view available tracks.</p>
+      ${btn('Clear filters','clear-search','','soft small')}
+    </div>
+  `}
+
+  <div class="card" style="margin-top:24px">
+    <button class="accordion" aria-expanded="${toolsOpen}" data-action="toggle-tools">
+      <span>✦ &nbsp; Practice tools</span>
+      <span>${toolsOpen?'−':'+'}</span>
+    </button>
+    ${toolsOpen?`
+      <p class="small-text">Quick ways to build a daily study habit.</p>
+      <div class="row" style="margin-top:16px">
+        ${btn('Try a sample drill','start-drill','','soft small')}
+        ${btn('Review mistakes','tab','data-tab="mistakes"','secondary small')}
+        ${btn('My materials','tab','data-tab="materials"','secondary small')}
+      </div>
+    `:''}
+  </div>`
+}
+
+const tabs=[
+  ['overview','Overview'],
+  ['practice','Practice'],
+  ['mocks','Mocks'],
+  ['mistakes','Mistakes'],
+  ['materials','My materials'],
+  ['progress','Progress'],
+  ['library','Library'],
+  ['setup','IELTS setup']
+];
+
+function examShell(content){
+  const subtitleMap = {
+    overview: 'Track your roadmap, diagnostic drills, and current progress.',
+    practice: 'Focused section drills with official timed question formats.',
+    mocks: 'Simulate computer-delivered test sittings under exam conditions.',
+    mistakes: 'Analyze and master past missed questions to close knowledge gaps.',
+    materials: 'Organize your notes, reference guides, and uploaded context.',
+    progress: 'Detailed skill accuracy analytics and performance trends.',
+    library: 'Centralized study materials and personalized reference files.',
+    setup: 'Configure target scores, test dates, and learning preferences.'
+  };
+  const titleText = `${S.exam} — ${tab.charAt(0).toUpperCase() + tab.slice(1)}`;
+  const subtitleText = subtitleMap[tab] || 'Interactive study platform and test environment.';
+
+  return `${crumb([S.exam])}
+  ${innerBanner(titleText, subtitleText)}
+  <div class="header-details">
+    <div>
+      <div class="heading-line">
+        <h1>${labelExam(S.exam)}</h1>
+        <span class="pill green">◷ Question bank ready</span>
+      </div>
+      <p class="sub small-text">No scored mock yet · target ${esc(S.target)} · ${S.date?esc(dateText()):'no test date'}</p>
+    </div>
+    ${btn('Start mock →','tab','data-tab="mocks"','primary')}
+  </div>
+  <nav class="nav-tabs" aria-label="Exam navigation">
+    ${tabs.map(([id,n])=>`
+      <button class="${tab===id?'active':''}" ${tab===id?'aria-current="page"':''} data-action="tab" data-tab="${id}">${n}</button>
+    `).join('')}
+  </nav>
+  ${content}`
+}
+
+function overview(){
+  let doneCount=S.attempts.filter(a=>a.exam===S.exam).length;
+  let steps=[
+    ['✓','Review the '+S.exam+' format','Know the sections, timing, and scoring before drilling.','done','Done'],
+    [doneCount?'✓':'2','Practice listening','Build accuracy in listening with section practice.',doneCount?'done':'','Next step'],
+    ['3','Generate more practice','Complete a mock first to identify skills to target.','lock','Locked'],
+    ['4','Take a full mock','A full sitting produces your predicted score and gap analysis.','','Next up'],
+    ['5','Review your gaps','Unlocks after your first completed mock.','lock','Locked']
+  ];
+  return `
+  <div class="grid three">
+    ${stat('PREDICTED','—','No scored mock yet','#5fc6b4')}
+    ${stat('TARGET',S.target,'by '+dateText(),'#f3b65e')}
+    ${stat('TREND','—','Needs 2 scored mocks','#a394ed')}
+  </div>
+
+  <div class="grid two" style="margin-top:18px">
+    <div class="card">
+      <div class="row">
+        ${ic('✧')}
+        <div>
+          <h3>Calibrate your plan</h3>
+          <p class="small-text">Optional diagnostic · sample experience</p>
+        </div>
+      </div>
+      <p style="font-size:13.5px;margin:16px 0">Get a feel for the four skills with a short demo. You can come back to it anytime.</p>
+      <div class="row">
+        ${btn(S.diagnosticDone?'Try diagnostic again':'Take diagnostic','start-diagnostic','','primary small')}
+        ${btn('Skip for now','skip-diagnostic','','secondary small')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="row">
+        ${ic('⚡','orange')}
+        <div>
+          <h3>Today’s drill</h3>
+          <p class="small-text">A little practice goes a long way</p>
+        </div>
+      </div>
+      <p style="font-size:13.5px;margin:16px 0">A quick warm-up across your exam’s core sections.</p>
+      ${btn('Start today’s drill →','start-drill','','soft small')}
+    </div>
+  </div>
+
+  <div class="content-layout" style="margin-top:18px">
+    <div class="card">
+      <div class="row between">
+        <div>
+          <h3>Your learning path</h3>
+          <p class="small-text">Follow these steps at your own pace.</p>
+        </div>
+        <span class="pill purple">Your journey</span>
+      </div>
+      ${steps.map(([n,title,desc,kind,status])=>`
+        <div class="path-step">
+          <div class="step-icon ${kind}">${n}</div>
+          <div class="grow">
+            <div class="row between">
+              <h4>${esc(title)}</h4>
+              <span class="pill ${kind==='done'?'green':kind==='lock'?'gray':'purple'}">${status}</span>
+            </div>
+            <p>${esc(desc)}</p>
+          </div>
+        </div>
+      `).join('')}
+      <div style="margin-top:16px">
+        ${btn('Explore practice →','tab','data-tab="practice"','text')}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row between">
+        <div>
+          <h3>This week</h3>
+          <p class="small-text">Suggested from your target and goals</p>
+        </div>
+        <span class="pill amber">Week 1</span>
+      </div>
+      <div style="margin-top:16px">
+        ${S.plan.slice(0,4).map((v,i)=>`
+          <div class="list-row">
+            <span class="pill gray">${['Mon','Tue','Wed','Thu'][i]}</span>
+            <span class="small-text">${esc(v)}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top:16px">
+        ${btn('Open full study plan →','full-plan','','text')}
+      </div>
+    </div>
+  </div>`
+}
+
+function practice(){
+  return `
+  <div class="section-header" style="margin-top:0">
+    <div>
+      <h2>Choose a section</h2>
+      <p>Practice one skill at a time with official section timings.</p>
+    </div>
+    <div class="row">
+      ${btn('Custom practice','custom-practice','','secondary small')}
+      ${btn('✦ Generate more practice','generate','','soft small')}
+    </div>
+  </div>
+
+  <div class="grid two">
+    ${skills.map(s=>`
+      <button class="section-link" data-action="start-skill" data-skill="${s.name}">
+        <div class="section-link-icon" style="background-image: url('${s.img}');"></div>
+        <span>
+          <strong>${s.name}</strong>
+          <small>${s.time} · ${s.count}</small>
+        </span>
+        <span class="arrow">›</span>
+      </button>
+    `).join('')}
+  </div>
+
+  ${S.exam==='IELTS General'?`
+    <div class="callout" style="margin-top:20px">
+      <strong>About General Training:</strong><br>
+      Listening and Speaking are identical in both IELTS versions. Reading and Writing sets use Academic reference materials until full GT modules arrive.
+    </div>
+  `:''}
+
+  <div class="section-header">
+    <div>
+      <h3>Explore the question bank</h3>
+      <p>Preview a sample question set from each section.</p>
+    </div>
+  </div>
+  <div class="row">
+    ${skills.map(s=>btn(s.name+' bank set','start-skill',`data-skill="${s.name}"`,'secondary small')).join('')}
+  </div>
+  <p class="tool-note" style="margin-top:16px">The practice runner contains illustrative sample questions for learning purposes.</p>`
+}
+
+function mocks(){
+  let a=S.attempts.filter(x=>x.exam===S.exam&&x.mode==='Mock preview');
+  return `
+  <div class="card mock-banner">
+    <div class="row between">
+      <div class="row">
+        ${ic('◷')}
+        <div>
+          <span class="eyebrow">Practice with purpose</span>
+          <h2>Full IELTS mock simulator</h2>
+          <p>Computer-delivered style · 4 sections</p>
+        </div>
+      </div>
+      <span class="pill purple">${S.exam.endsWith('General')?'170':'165'} minutes</span>
+    </div>
+    <p style="margin-top:20px;font-size:13.5px">Listening → Reading → Writing → Speaking with real section timing.</p>
+    ${S.exam.endsWith('General')?`<div class="callout amber" style="margin-top:16px">General Training Reading and Writing bands use Academic-based reference sets in this mock preview.</div>`:''}
+    <div class="inline-alert" style="margin-top:16px">
+      <strong>Demo preview:</strong> Launches an interactive 4-question section sampler.
+    </div>
+    <div style="margin-top:20px">
+      ${btn('Start IELTS mock preview →','start-mock','','primary')}
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div>
+      <h2>Recent attempts</h2>
+      <p>Demo mock previews for this exam</p>
+    </div>
+  </div>
+
+  <div class="card">
+    ${a.length ? a.slice().reverse().map(x=>`
+      <div class="list-row">
+        ${ic('◷','teal')}
+        <div class="meta">
+          <strong>Mock preview</strong>
+          <div class="small-text muted">${esc(x.when)} · ${x.correct}/${x.scored} objective questions correct</div>
+        </div>
+        <span class="pill gray">Demo · no band</span>
+      </div>
+    `).join('') : `
+      <div class="empty">
+        <h3>No completed attempts yet</h3>
+        <p>Take a full mock preview to experience the test environment and evaluate your baseline timing.</p>
+        ${btn('Explore mock preview','start-mock','','soft small')}
+      </div>
+    `}
+  </div>`
+}
+
+function mistakes(){
+  let items=S.mistakes.filter(m=>m.exam===S.exam&&findQ(m.id));
+  return `
+  <div class="section-header" style="margin-top:0">
+    <div>
+      <h2>Mistake notebook</h2>
+      <p>Your missed sample questions, ready for review.</p>
+    </div>
+    <span class="pill ${items.length?'amber':'green'}">${items.length} open</span>
+  </div>
+  <div class="card">
+    ${items.length ? items.map(m=>{
+      let q=findQ(m.id);
+      return `
+      <div class="list-row">
+        ${ic('↺','orange')}
+        <div class="meta">
+          <strong>${esc(q.skill)} · Revisit question</strong>
+          <div class="small-text muted">${esc(q.prompt)}</div>
+        </div>
+        ${btn('Retry','retry',`data-id="${m.id}"`,'soft small')}
+      </div>`
+    }).join('') : `
+      <div class="empty">
+        <h3>No open mistakes — clean sheet!</h3>
+        <p>Every missed sample question has been fixed. Keep up the solid effort!</p>
+        ${btn('Try a practice question','tab','data-tab="practice"','soft small')}
+      </div>
+    `}
+  </div>`
+}
+
+function materials(library=false){
+  let examFiles = S.files.filter(f=>f.exam===S.exam);
+  return `
+  <div class="section-header" style="margin-top:0">
+    <div>
+      <h2>${library?'Your private library':'My materials'}</h2>
+      <p>${library?'Keep track of notes and uploaded resources for this exam.':'Your notes, past papers and screenshots for '+esc(S.exam)+'.'}</p>
+    </div>
+    <span class="pill purple">${examFiles.length} items</span>
+  </div>
+
+  <div class="callout" style="margin-bottom:18px">
+    <strong>Prototype note:</strong> Files stay in your local browser state. Their names, sizes, and file types are saved to demonstrate how your study context is organized.
+  </div>
+
+  <div class="dropzone" id="dropzone">
+    <strong>Drop files here or click to browse</strong>
+    <p>PDF, Word, PowerPoint, Excel, TXT/MD, and images · up to 10 MB each</p>
+    <input id="file-input" type="file" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.md,image/*" class="hidden">
+    <div style="margin-top:16px">
+      ${btn('Choose files','choose-files','','primary small')}
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div>
+      <h3>Your materials</h3>
+      <p>Accessible in your study hub for ${esc(S.exam)}.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    ${examFiles.length ? examFiles.map(f=>`
+      <div class="file-row">
+        ${ic('▤','purple')}
+        <div class="meta">
+          <strong>${esc(f.name)}</strong>
+          <div class="small-text muted">${esc(f.size)} · Saved context</div>
+        </div>
+        ${btn('Remove','remove-file',`data-id="${esc(f.id)}"`,'secondary small')}
+      </div>
+    `).join('') : `
+      <div class="empty">
+        <p class="muted">No materials uploaded yet. Try adding a file above.</p>
+      </div>
+    `}
+  </div>
+
+  <div style="margin-top:18px">
+    ${btn('Ask the AI tutor about your materials','tutor','','secondary small')}
+  </div>`
+}
+
+function progress(){
+  let at=S.attempts.filter(a=>a.exam===S.exam);
+  return `
+  <div class="section-header" style="margin-top:0">
+    <div>
+      <h2>Your progress</h2>
+      <p>A little practice adds up every day. Here is your session summary.</p>
+    </div>
+  </div>
+
+  <div class="grid three">
+    ${stat('OVERALL','—','No scored mock yet','#68c7b7')}
+    ${stat('WEAKEST SKILL','—','Not enough scored data','#f0b762')}
+    ${stat('SESSIONS',String(at.length),'Completed demo sessions','#ab9ef0')}
+  </div>
+
+  <div class="section-header">
+    <div>
+      <h3>Practice by skill</h3>
+      <p>Build a baseline score one section at a time.</p>
+    </div>
+  </div>
+
+  <!-- PROGRESS CARDS WITH VIBRANT BACKGROUND COLOURS AND IMAGES -->
+  <div class="grid four">
+    ${skills.map(s=>{
+      let n=at.filter(a=>a.skills.includes(s.name)).length;
+      return `
+      <div class="skill-card-rich ${s.bgClass}">
+        <div class="skill-card-thumb" style="background-image: url('${s.img}');">
+          <div class="skill-card-thumb-overlay"></div>
+        </div>
+        <div class="skill-card-content">
+          <div class="row between">
+            <h3 style="margin:0;font-size:16px;">${s.name}</h3>
+            <span class="pill ${n?'purple':'gray'}">${n?'Practised':'New'}</span>
+          </div>
+          <p class="small-text muted" style="margin:4px 0 12px">${n} demo ${n===1?'attempt':'attempts'}</p>
+          ${btn('Practice '+s.name,'start-skill',`data-skill="${s.name}"`,'secondary small')}
+        </div>
+      </div>`
+    }).join('')}
+  </div>
+
+  <div class="section-header">
+    <div>
+      <h3>Recommended next</h3>
+      <p>Target a skill to improve your overall balance.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    ${skills.map(s=>`
+      <div class="list-row">
+        <div style="width:40px;height:40px;border-radius:10px;overflow:hidden;background-image: url('${s.img}'); background-size: cover; background-position: center;"></div>
+        <div class="meta">
+          <strong>Try ${s.name}</strong>
+          <div class="small-text muted">Complete a sample drill.</div>
+        </div>
+        ${btn('Practice →','start-skill',`data-skill="${s.name}"`,'text')}
+      </div>
+    `).join('')}
+  </div>`
+}
+
+function opt(values,current){
+  return values.map(v=>`<option value="${esc(v)}" ${String(current)===String(v)?'selected':''}>${esc(v)}</option>`).join('')
+}
+
+function setting(){
+  return `
+  <div class="section-header" style="margin-top:0">
+    <div>
+      <h2>IELTS setup</h2>
+      <p>Personalize your target band, schedule, and preferences.</p>
+    </div>
+    <span class="pill purple">Your preferences</span>
+  </div>
+
+  <form id="setup-form" class="card stack">
+    <div class="grid two">
+      <div class="field">
+        <label for="exam-module">IELTS module</label>
+        <select id="exam-module" name="exam">${opt(exams,S.exam)}</select>
+      </div>
+      <div class="field">
+        <label for="target">Target band</label>
+        <select id="target" name="target">${opt(['4.0','4.5','5.0','5.5','6.0','6.5','7.0','7.5','8.0','8.5','9.0'],S.target)}</select>
+      </div>
+      <div class="field">
+        <label for="date">Test date</label>
+        <input class="input" id="date" name="date" type="date" value="${esc(S.date)}">
+      </div>
+      <div class="field">
+        <label for="language">Instruction language</label>
+        <select id="language" name="language">${opt(['English'],S.language)}</select>
+      </div>
+      <div class="field">
+        <label for="support">English support</label>
+        <select id="support" name="support">${opt(['Balanced','More support','Less support'],S.support)}</select>
+      </div>
+      <div class="field">
+        <label for="learning">Learning pace</label>
+        <select id="learning" name="learning">${opt(['Standard','Gentle','Focused'],S.learning)}</select>
+      </div>
+      <div class="field">
+        <label for="daily">Daily goal (minutes)</label>
+        <input class="input" id="daily" name="daily" type="number" min="1" max="480" required value="${esc(S.daily)}">
+      </div>
+      <div class="field">
+        <label for="weekly">Weekly sessions</label>
+        <input class="input" id="weekly" name="weekly" type="number" min="1" max="7" required value="${esc(S.weekly)}">
+      </div>
+    </div>
+
+    <div class="stack">
+      ${[
+        ['attachments','Attachments','Use uploaded PDFs, docs and images as private study context.'],
+        ['voice','Voice examiner','Use realtime voice for Speaking practice when available.'],
+        ['noise','Noise reduction','Ask browser to reduce background noise during Speaking.']
+      ].map(([id,title,desc])=>`
+        <div class="toggle-row">
+          <div>
+            <strong>${title}</strong>
+            <p class="muted">${desc}</p>
+          </div>
+          <label class="switch" aria-label="${title}">
+            <input type="checkbox" name="${id}" ${S[id]?'checked':''}>
+            <span></span>
+          </label>
+        </div>
+      `).join('')}
+    </div>
+
+    <p class="tool-note">Settings are stored locally in this browser.</p>
+    <div>
+      <button class="btn" type="submit">Save IELTS setup</button>
+    </div>
+  </form>`
+}
+
+function render(){
+  let content;
+  if(page==='runner') content=runner();
+  else if(page==='result') content=result();
+  else if(page==='home') content=hubTab==='browse'?browse():home();
+  else content=examShell(({
+    overview, practice, mocks, mistakes,
+    materials:()=>materials(false), progress,
+    library:()=>materials(true), setup:setting
+  }[tab]||overview)());
+  app.innerHTML=content;
+}
+
+function showModal(title,body,actions=''){
+  modalName=title;
+  $('#modal-root').innerHTML=`
+  <div class="modal-backdrop" data-action="backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <h2 id="modal-title">${title}</h2>
+        <button class="close" data-action="close-modal" aria-label="Close">×</button>
+      </div>
+      ${body}
+      ${actions?`<div class="modal-actions">${actions}</div>`:''}
+    </div>
+  </div>`;
+  setTimeout(()=>$('#modal-root .close')?.focus(),0);
+}
+
+function closeModal(){$('#modal-root').innerHTML='';modalName=''}
+
+function start(mode,ids){
+  session={mode,ids,index:0,answers:{},exam:S.exam,started:Date.now()};
+  page='runner';
+  closeModal();
+  render();
+  scrollTop();
+}
+
+function runner(){
+  if(!session) return '';
+  let q=findQ(session.ids[session.index]);
+  let a=session.answers[q.id];
+  let count=session.ids.length;
+  return `
+  ${crumb([session.exam,session.mode])}
+  ${innerBanner(session.mode, 'Interactive practice session in progress — stay focused and complete each question.')}
+  <div class="runner">
+    <div class="runner-header">
+      <div>
+        <p class="eyebrow">Illustrative practice · ${esc(session.mode)}</p>
+        <h1 style="margin:0;font-size:28px;letter-spacing:-1px">One question at a time.</h1>
+        <p class="sub small-text">This preview is designed for interactive learning.</p>
+      </div>
+      ${btn('Exit session','exit-session','','secondary small')}
+    </div>
+    <div class="row between" style="margin-top:20px">
+      <strong class="small-text">Question ${session.index+1} of ${count}</strong>
+      <span class="pill purple">${esc(q.skill)}</span>
+    </div>
+    <div class="progress-bar">
+      <span style="width:${Math.round((session.index+1)/count*100)}%"></span>
+    </div>
+    <div class="card question-card">
+      <div class="row between">
+        <span class="pill ${q.skill==='Listening'?'blue':'purple'}">${esc(q.skill)} · sample</span>
+        <span class="small-text muted">${q.free?'Written response':'Choose one answer'}</span>
+      </div>
+      <h2>${esc(q.prompt)}</h2>
+      ${q.free ? `
+        <label for="response">Your response</label>
+        <textarea id="response" placeholder="Write your response here...">${esc(a??'')}</textarea>
+        <p class="notice">Type your sample response above.</p>
+      ` : q.options.map((o,i)=>`
+        <label class="option">
+          <input type="radio" name="answer" value="${i}" ${a===i?'checked':''}>
+          <span>${esc(o)}</span>
+        </label>
+      `).join('')}
+      <div class="separator"></div>
+      <div class="row between">
+        ${btn('← Previous','previous','','secondary small')}
+        <span class="small-text muted">${session.index+1} / ${count}</span>
+        ${btn(session.index===count-1?'Finish practice':'Next question →','next-question','','primary')}
+      </div>
+    </div>
+  </div>`
+}
+
+function result(){
+  let r=session.result;
+  return `
+  ${crumb([session.exam,'Practice results'])}
+  <div class="runner">
+    <div class="card" style="text-align:center;padding:36px">
+      <p class="eyebrow" style="margin-top:14px">Session complete</p>
+      <h1 style="margin:0;font-size:30px;letter-spacing:-1px">Great job showing up today!</h1>
+      <p class="sub">${r.scored?r.correct+' of '+r.scored+' objective questions correct.':'Your practice response has been saved.'}</p>
+      <div class="row" style="justify-content:center;margin-top:20px">
+        ${btn('Back to overview','tab','data-tab="overview"','primary')}
+        ${btn('Explore practice','tab','data-tab="practice"','secondary')}
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div>
+        <h3>Review your answers</h3>
+        <p>Learn from each question you tried.</p>
+      </div>
+    </div>
+
+    <div class="stack">
+      ${session.ids.map(id=>{
+        let q=findQ(id), a=session.answers[id];
+        return `
+        <div class="card">
+          <div class="row between">
+            <span class="pill purple">${q.skill}</span>
+            <span class="pill ${q.free?'gray':a===q.answer?'green':'amber'}">${q.free?'Completed':a===undefined?'Skipped':a===q.answer?'Correct':'Review'}</span>
+          </div>
+          <h3 style="font-size:16px;margin-top:12px">${esc(q.prompt)}</h3>
+          ${q.free ? `
+            <p class="small-text">${a?'Your response: '+esc(a):'No response provided.'}</p>
+          ` : `
+            <p class="small-text">Your answer: ${a===undefined?'Not answered':esc(q.options[a])}</p>
+            <p class="small-text"><strong>Correct answer:</strong> ${esc(q.options[q.answer])}. ${esc(q.explain)}</p>
+          `}
+        </div>`
+      }).join('')}
+    </div>
+  </div>`
+}
+
+function complete(){
+  let correct=0,scored=0;
+  for(let id of session.ids){
+    let q=findQ(id), a=session.answers[id];
+    if(!q.free && a!==undefined){
+      scored++;
+      if(a===q.answer){
+        correct++;
+        S.mistakes=S.mistakes.filter(m=>!(m.exam===session.exam&&m.id===id));
+      } else if(!S.mistakes.some(m=>m.exam===session.exam&&m.id===id)) {
+        S.mistakes.push({exam:session.exam,id});
+      }
+    }
+  }
+  let entry={
+    exam:session.exam,
+    mode:session.mode,
+    skills:[...new Set(session.ids.map(id=>findQ(id).skill))],
+    correct,
+    scored,
+    when:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})
+  };
+  S.attempts.push(entry);
+  if(session.mode==='Diagnostic preview') S.diagnosticDone=true;
+  session.result=entry;
+  save();
+  page='result';
+  render();
+  scrollTop();
+}
+
+function setTab(t){
+  page='exam';
+  tab=t||'overview';
+  closeModal();
+  render();
+  scrollTop();
+}
+
+function upload(files){
+  let accepted=['pdf','doc','docx','ppt','pptx','xls','xlsx','txt','md','png','jpg','jpeg','gif','webp','bmp','svg','heic'];
+  let added=0, ignored=0;
+  for(let f of files){
+    let ext=f.name.split('.').pop().toLowerCase();
+    if(f.size>10*1024*1024 || !accepted.includes(ext)){ ignored++; continue; }
+    S.files.push({
+      id:Date.now()+'-'+Math.random().toString(36).slice(2),
+      exam:S.exam,
+      name:f.name,
+      size:f.size<1024?f.size+' B':(f.size/1024<1024?(f.size/1024).toFixed(1)+' KB':(f.size/1024/1024).toFixed(1)+' MB')
+    });
+    added++;
+  }
+  save();
+  render();
+  toast(`${added} file ${added===1?'name':'names'} added${ignored?`; ${ignored} ignored`:''}.`);
+}
+
+function act(action,el,e){
+  switch(action){
+    case 'home': page='home'; hubTab='myprep'; closeModal(); render(); scrollTop(); break;
+    case 'browse': page='home'; hubTab='browse'; closeModal(); render(); scrollTop(); break;
+    case 'hub-tab': hubTab=el.dataset.value; render(); break;
+    case 'filter': filter=el.dataset.value; render(); break;
+    case 'clear-search': search=''; filter='All'; render(); break;
+    case 'toggle-tools': toolsOpen=!toolsOpen; render(); break;
+    case 'practice-tools': page='home'; hubTab='browse'; toolsOpen=true; render(); scrollTop(); break;
+    case 'open-focus': S.exam=S.focus; save(); setTab('overview'); break;
+    case 'open-other': S.exam=exams.find(x=>x!==S.focus); save(); setTab('overview'); break;
+    case 'open-exam': S.exam=el.dataset.exam; save(); setTab('overview'); break;
+    case 'tab': setTab(el.dataset.tab); break;
+    case 'setup': setTab('setup'); break;
+    case 'change-focus':
+      showModal('Choose your focus exam',`
+        <p>Your focus exam appears front and center on My Prep.</p>
+        <div class="stack">
+          ${exams.map(x=>`
+            <button class="section-link" data-action="set-focus" data-exam="${esc(x)}">
+              <div class="section-link-icon" style="background-image: url('${x.includes('General')?image3_General:image2_Academic}');"></div>
+              <span>
+                <strong>${esc(x)}</strong>
+                <small>${x===S.focus?'Current focus':'Switch to this exam'}</small>
+              </span>
+              <span class="arrow">›</span>
+            </button>
+          `).join('')}
+        </div>
+      `);
+      break;
+    case 'set-focus': S.focus=el.dataset.exam; save(); closeModal(); render(); toast('Focus exam updated.'); break;
+    case 'exam-details': {
+      let x=el.dataset.exam;
+      showModal(esc(x),`
+        <p>${x.endsWith('General')?'A General Training path focusing on practical writing and reading tasks.':'Academic preparation across Listening, Reading, Writing, and Speaking.'}</p>
+        <div class="exam-meta">
+          <small>SECTIONS</small>
+          <span>Listening · Reading · Writing · Speaking</span>
+        </div>
+        <p style="margin-top:12px">Duration: ${x.endsWith('General')?'170':'165'} minutes.</p>
+      `, btn('Continue prep →','open-exam',`data-exam="${esc(x)}"`,'primary'));
+      break;
+    }
+    case 'start-skill':
+      if(el.dataset.focus) S.exam=S.focus;
+      start(el.dataset.skill+' practice', [el.dataset.skill.toLowerCase()]);
+      break;
+    case 'start-drill': start('Today’s drill',['reading','listening']); break;
+    case 'start-diagnostic': start('Diagnostic preview',['listening','reading','writing','speaking']); break;
+    case 'skip-diagnostic': S.diagnosticSkipped=true; save(); toast('Diagnostic skipped for now.'); break;
+    case 'start-mock':
+      showModal('Before you begin',`
+        <p>This sampler runs 4 practice items representing Listening, Reading, Writing, and Speaking.</p>
+      `, btn('Not now','close-modal','','secondary') + btn('Start preview →','confirm-mock','','primary'));
+      break;
+    case 'confirm-mock': start('Mock preview',['listening','reading','writing','speaking']); break;
+    case 'custom-practice':
+      showModal('Custom practice',`
+        <p>Select a skill section to drill:</p>
+        <div class="grid two">
+          ${skills.map(s=>btn(s.name,'start-skill',`data-skill="${s.name}"`,'secondary')).join('')}
+        </div>
+      `);
+      break;
+    case 'generate':
+      showModal('Generate practice',`<p>Practice target generation is active.</p>`, btn('Explore sections','tab','data-tab="practice"','primary'));
+      break;
+    case 'retry': start('Mistake review',[el.dataset.id]); break;
+    case 'todo':
+      S.exam=S.focus;
+      if(S.diagnosticDone) setTab('practice');
+      else start('Diagnostic preview',['listening','reading','writing','speaking']);
+      break;
+    case 'exit-session':
+      showModal('Leave session?',`<p>Your progress in this uncompleted attempt will be lost.</p>`,
+        btn('Keep practising','close-modal','','secondary') + btn('Leave','confirm-exit','','primary'));
+      break;
+    case 'confirm-exit': session=null; setTab('overview'); break;
+    case 'previous':
+      if(session.index>0){ session.index--; render(); scrollTop(); }
+      else toast('You are at the first question.');
+      break;
+    case 'next-question':
+      if(session.index<session.ids.length-1){ session.index++; render(); scrollTop(); }
+      else complete();
+      break;
+    case 'choose-files': $('#file-input')?.click(); break;
+    case 'remove-file': S.files=S.files.filter(f=>f.id!==el.dataset.id); save(); render(); toast('File removed.'); break;
+    case 'tutor':
+      showModal('Ask the tutor',`<p>Uploaded materials assist your AI study coach.</p>`, btn('Go to practice','tab','data-tab="practice"','primary'));
+      break;
+    case 'full-plan':
+      showModal('Your weekly study plan',`<p>Structured weekly roadmap:</p>${week()}`, btn('Edit my plan','edit-plan','','primary'));
+      break;
+    case 'edit-plan':
+      showModal('Edit weekly plan',`
+        <form id="plan-form" class="stack">
+          ${S.plan.map((v,i)=>`
+            <div class="field">
+              <label for="plan-${i}">${['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][i]}</label>
+              <input class="input" id="plan-${i}" name="p${i}" value="${esc(v)}" maxlength="90" required>
+            </div>
+          `).join('')}
+          <div class="modal-actions">
+            <button type="button" class="btn secondary" data-action="close-modal">Cancel</button>
+            <button class="btn" type="submit">Save plan</button>
+          </div>
+        </form>
+      `);
+      break;
+    case 'score-tracker': S.exam=S.focus; setTab('progress'); break;
+    case 'gap-analysis': S.exam=S.focus; setTab('progress'); break;
+    case 'close-modal': closeModal(); break;
+    case 'backdrop': if(e.target===el) closeModal(); break;
+  }
+}
+
+document.addEventListener('click',e=>{ let el=e.target.closest('[data-action]'); if(el) act(el.dataset.action,el,e); });
+document.addEventListener('input',e=>{
+  if(e.target.id==='exam-search'){
+    let pos=e.target.selectionStart; search=e.target.value; render();
+    let inp=$('#exam-search'); inp?.focus();
+    try{ inp?.setSelectionRange(pos,pos); }catch(err){}
+  }
+  if(page==='runner'&&session){
+    let q=findQ(session.ids[session.index]);
+    if(e.target.name==='answer') session.answers[q.id]=Number(e.target.value);
+    if(e.target.id==='response') session.answers[q.id]=e.target.value;
+  }
+});
+document.addEventListener('change',e=>{ if(e.target.id==='file-input') upload(e.target.files); });
+document.addEventListener('submit',e=>{
+  if(e.target.id==='setup-form'){
+    e.preventDefault();
+    let f=new FormData(e.target);
+    for(let k of ['exam','target','date','language','support','learning']) S[k]=String(f.get(k)||'');
+    S.daily=Number(f.get('daily'));
+    S.weekly=Number(f.get('weekly'));
+    for(let k of ['attachments','voice','noise']) S[k]=f.has(k);
+    save(); render(); toast('IELTS setup saved.');
+  }
+  if(e.target.id==='plan-form'){
+    e.preventDefault();
+    let f=new FormData(e.target);
+    S.plan=Array.from({length:6},(_,i)=>String(f.get('p'+i)).trim());
+    save(); closeModal(); render(); toast('Weekly plan updated.');
+  }
+});
+document.addEventListener('dragover',e=>{ if(e.target.closest('#dropzone')){ e.preventDefault(); $('#dropzone')?.classList.add('dragover'); } });
+document.addEventListener('dragleave',e=>{ if(e.target.closest('#dropzone')) $('#dropzone')?.classList.remove('dragover'); });
+document.addEventListener('drop',e=>{ if(e.target.closest('#dropzone')){ e.preventDefault(); upload(e.dataTransfer.files); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&modalName) closeModal(); });
+
+render();
+})();
+</script>
+</body>
+</html>
